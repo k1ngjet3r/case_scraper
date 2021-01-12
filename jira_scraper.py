@@ -78,7 +78,7 @@ class Scraper():
         self.wb.save(self.output_name)
 
     def url_gen(self, tcid):
-        frame = f'https://matsjira.cienetcorp.com/issues/?jql=project%20%3D%20%22TESTSPEC%20MY22%22%20AND%20text%20~%20'
+        frame = f'https://matsjira.cienetcorp.com/issues/?jql=project%20%3D%20TESTSPEC22%20AND%20Location%20%3DTaipei%20AND%20text%20~%20'
         return frame + str(tcid)
 
 scrp = Scraper('MY22TCs transfer list_TaiPei.xlsx', 'W01_trial.xlsx')
