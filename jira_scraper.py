@@ -81,6 +81,6 @@ class Scraper():
         frame = f'https://matsjira.cienetcorp.com/issues/?jql=project%20%3D%20TESTSPEC22%20AND%20Location%20%3DTaipei%20AND%20text%20~%20'
         return frame + str(tcid)
 
-scrp = Scraper('MY22TCs transfer list_TaiPei.xlsx', 'W01_trial.xlsx')
+scrp = Scraper('Original.xlsx', 'W03_list.xlsx')
 
 scrp.scrapping()
