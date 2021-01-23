@@ -52,7 +52,8 @@ class Scraper():
             try:
                 original_TCID = driver.find_element_by_class_name(
                     'customfield_10202').text
-                bug_id = driver.find_element_by_class_name('customfield_10212').text
+                bug_id = driver.find_element_by_class_name(
+                    'customfield_10212').text
                 result = driver.find_element_by_class_name(
                     'customfield_10341').text
                 precondition = driver.find_element_by_class_name(
@@ -63,7 +64,8 @@ class Scraper():
                     'customfield_10315').text
                 objective = driver.find_element_by_class_name(
                     'customfield_10336').text
-                test_plan_name = driver.find_element_by_class_name('customfield_10340').text
+                test_plan_name = driver.find_element_by_class_name(
+                    'customfield_10340').text
                 case_detail = [original_TCID, result, bug_id,
                                precondition, test_step, expected, objective, test_plan_name]
                 print('Found!')
@@ -78,8 +80,9 @@ class Scraper():
         self.wb.save(self.output_name)
 
     def url_gen(self, tcid):
-        frame = f'https://matsjira.cienetcorp.com/issues/?jql=project%20%3D%20TESTSPEC22%20AND%20Location%20%3DTaipei%20AND%20text%20~%20'
+        frame = f'https://matsjira.cienetcorp.com/issues/?jql=project%20%3D%20TESTSPEC22%20AND%20%22Original%20GM%20TC%20ID%22%20%20~%20'
         return frame + str(tcid)
+
 
 scrp = Scraper('Original.xlsx', 'W03_list.xlsx')
 
