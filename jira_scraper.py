@@ -2,8 +2,6 @@
     This is primary for scrapping MY-22 cases from Jira
 '''
 
-from bs4 import BeautifulSoup
-import requests
 from selenium import webdriver
 from openpyxl import load_workbook
 from openpyxl import Workbook
