@@ -15,7 +15,7 @@ class Scraper():
 
     def case_list(self):
         id_list = []
-        for id in self.tc_list_sheet.iter_rows(max_col=1, values_only=True):
+        for id in self.tc_list_sheet.iter_rows(max_col=1, max_row=1651, values_only=True):
             if id is not None:
                 id_list.append(str(id)[2:-3])
             else:
