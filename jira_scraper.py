@@ -15,7 +15,7 @@ class Scraper():
 
     def case_list(self):
         id_list = []
-        for id in self.tc_list_sheet.iter_rows(max_col=1, max_row=1651, values_only=True):
+        for id in self.tc_list_sheet.iter_rows(max_col=1, values_only=True):
             if id is not None:
                 id_list.append(str(id)[2:-3])
             else:
@@ -43,9 +43,9 @@ class Scraper():
         self.wb.create_sheet('Not found', 0)
         self.wb.create_sheet('Detailed list', 0)
 
-        id_list = self.case_list()[1:]
+        id_list = self.case_list()
         cur_num = 0
-        total_tc = len(id_list)-1
+        total_tc = len(id_list)
 
         for id in id_list:
             cur_num += 1
@@ -54,10 +54,10 @@ class Scraper():
             try:
                 original_TCID = driver.find_element_by_class_name(
                     'customfield_10202').text
-                bug_id = driver.find_element_by_class_name(
-                    'customfield_10212').text
-                result = driver.find_element_by_class_name(
-                    'customfield_10341').text
+                # bug_id = driver.find_element_by_class_name(
+                #     'customfield_10212').text
+                # result = driver.find_element_by_class_name(
+                #     'customfield_10341').text
                 precondition = driver.find_element_by_class_name(
                     'customfield_10331').text
                 test_step = driver.find_element_by_class_name(
@@ -66,10 +66,9 @@ class Scraper():
                     'customfield_10315').text
                 objective = driver.find_element_by_class_name(
                     'customfield_10336').text
-                test_plan_name = driver.find_element_by_class_name(
-                    'customfield_10340').text
-                case_detail = [original_TCID, result, bug_id,
-                               precondition, test_step, expected, objective, test_plan_name]
+                # test_plan_name = driver.find_element_by_class_name(
+                #     'customfield_10340').text
+                case_detail = [original_TCID, precondition, test_step, expected, objective]
                 print('Found!')
                 print('==========================================')
                 self.wb['Detailed list'].append(case_detail)
@@ -86,6 +85,6 @@ class Scraper():
         return frame + str(tcid)
 
 
-scrp = Scraper('Original.xlsx', 'W03_list.xlsx')
+scrp = Scraper('W05_trial.xlsx', 'W05_trialrun.xlsx')
 
 scrp.scrapping()
