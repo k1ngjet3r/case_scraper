@@ -85,6 +85,6 @@ class Scraper():
         return frame + str(tcid)
 
 
-scrp = Scraper('W05_trial.xlsx', 'W05_trialrun.xlsx')
+scrp = Scraper('W11_list.xlsx', 'W11_cases.xlsx')
 
 scrp.scrapping()
