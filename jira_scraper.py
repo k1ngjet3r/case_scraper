@@ -47,6 +47,9 @@ class Scraper():
         cur_num = 0
         total_tc = len(id_list)
 
+        found_cases = 0
+        not_found_cases = 0
+
         for id in id_list:
             cur_num += 1
             print('fatching...{}/{}'.format(cur_num, total_tc))
@@ -69,22 +72,27 @@ class Scraper():
                 # test_plan_name = driver.find_element_by_class_name(
                 #     'customfield_10340').text
                 case_detail = [original_TCID, precondition, test_step, expected, objective]
+                found_cases += 1
                 print('Found!')
                 print('==========================================')
                 self.wb['Detailed list'].append(case_detail)
             except:
+                not_found_cases += 1
                 print('cannot find the detail of case: {}'.format(id))
                 print('==========================================')
                 self.wb['Not found'].append([id])
 
         print('Done!, saving the file named {}'.format(self.output_name))
         self.wb.save(self.output_name)
+        print('[SUMMARY]:')
+        print('Found cases: {}'.format(found_cases))
+        print('Not Found: {}'.format(not_found_cases))
 
     def url_gen(self, tcid):
         frame = f'https://matsjira.cienetcorp.com/issues/?jql=project%20%3D%20TESTSPEC22%20AND%20%22Original%20GM%20TC%20ID%22%20%20~%20'
         return frame + str(tcid)
 
 
-scrp = Scraper('W11_list.xlsx', 'W13_cases.xlsx')
+scrp = Scraper('newly_added.xlsx', 'newly_added_detail.xlsx')
 
 scrp.scrapping()
