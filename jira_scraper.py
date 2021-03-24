@@ -9,7 +9,7 @@ from openpyxl import Workbook
 
 class Scraper():
     def __init__(self, test_case_list, output_name):
-        self.tc_list_sheet = (load_workbook(str(test_case_list))).active
+        self.tc_list_sheet = (load_workbook(str(test_case_list)))['Overview']
         self.output_name = str(output_name)
         self.wb = Workbook()
 
@@ -57,10 +57,7 @@ class Scraper():
             try:
                 original_TCID = driver.find_element_by_class_name(
                     'customfield_10202').text
-                # bug_id = driver.find_element_by_class_name(
-                #     'customfield_10212').text
-                # result = driver.find_element_by_class_name(
-                #     'customfield_10341').text
+
                 precondition = driver.find_element_by_class_name(
                     'customfield_10331').text
                 test_step = driver.find_element_by_class_name(
@@ -69,8 +66,11 @@ class Scraper():
                     'customfield_10315').text
                 objective = driver.find_element_by_class_name(
                     'customfield_10336').text
-                # test_plan_name = driver.find_element_by_class_name(
-                #     'customfield_10340').text
+
+                # summary = driver.find_element_by_class_name('issue-link').text
+                # frop_1 = driver.find_element_by_class_name('customfield_10200').text
+                # frop_2 = driver.find_element_by_class_name('customfield_10319').text
+
                 case_detail = [original_TCID, precondition, test_step, expected, objective]
                 found_cases += 1
                 print('Found!')
@@ -93,6 +93,6 @@ class Scraper():
         return frame + str(tcid)
 
 
-scrp = Scraper('newly_added.xlsx', 'newly_added_detail.xlsx')
+scrp = Scraper('Automation_phase_1.xlsx', 'Phase_1_detail.xlsx')
 
 scrp.scrapping()
