@@ -9,7 +9,7 @@ from openpyxl import Workbook
 
 class Scraper():
     def __init__(self, test_case_list, output_name):
-        self.tc_list_sheet = (load_workbook(str(test_case_list)))['Overview']
+        self.tc_list_sheet = (load_workbook(str(test_case_list))).active
         self.output_name = str(output_name)
         self.wb = Workbook()
 
@@ -93,6 +93,6 @@ class Scraper():
         return frame + str(tcid)
 
 
-scrp = Scraper('Automation_phase_1.xlsx', 'Phase_1_detail.xlsx')
+scrp = Scraper('W14_testplan.xlsx', 'W14_cases.xlsx')
 
 scrp.scrapping()
