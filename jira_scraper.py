@@ -93,6 +93,6 @@ class Scraper():
         return frame + str(tcid)
 
 
-scrp = Scraper('MY22_QIH22B-301_1200.xlsx', 'W15_301_cases.xlsx')
+scrp = Scraper('MY22_QIHM22B-303_301.xlsx', 'W15_301_cases.xlsx')
 
 scrp.scrapping()
