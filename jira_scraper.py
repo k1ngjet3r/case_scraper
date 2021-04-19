@@ -9,17 +9,15 @@ from openpyxl import Workbook
 
 class Scraper():
     def __init__(self, test_case_list, output_name):
-        self.tc_list_sheet = (load_workbook(str(test_case_list))).active
+        self.tc_list_sheet = (load_workbook(str(test_case_list)))['Test Plan']
         self.output_name = str(output_name)
         self.wb = Workbook()
 
     def case_list(self):
         id_list = []
-        for id in self.tc_list_sheet.iter_rows(max_col=1, values_only=True):
-            if id is not None:
-                id_list.append(str(id)[2:-3])
-            else:
-                break
+        for id in self.tc_list_sheet.iter_rows(max_col=3, values_only=True):
+            if id[-1] == 'Taipei':
+                id_list.append(id[0])
         return id_list
 
     def scrapping(self):
@@ -92,7 +90,7 @@ class Scraper():
         frame = f'https://matsjira.cienetcorp.com/issues/?jql=project%20%3D%20TESTSPEC22%20AND%20%22Original%20GM%20TC%20ID%22%20%20~%20'
         return frame + str(tcid)
 
+if __name__ == '__main__':
+    scrp = Scraper('MY22 test plan_Full_ProductionLine_W17.xlsx', 'W17_production_cases.xlsx')
 
-scrp = Scraper('MY22_main_288.xlsx', 'W16_288_main_cases.xlsx')
-
-scrp.scrapping()
+    scrp.scrapping()
