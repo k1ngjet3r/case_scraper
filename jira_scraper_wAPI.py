@@ -6,3 +6,4 @@ jira_instance = Jira(url='http://matsjira.cienetcorp.com/',
                     password='sD4T1pDTZp'
                     )
 
+jira_instance.issue(key='TC_MFL_MyProfile_Security_None_002', fields=['summary'])
