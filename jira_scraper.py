@@ -9,14 +9,14 @@ from openpyxl import Workbook
 
 class Scraper():
     def __init__(self, test_case_list, output_name):
-        self.tc_list_sheet = (load_workbook(str(test_case_list)))['Production']
+        self.tc_list_sheet = (load_workbook(str(test_case_list)))['Test Plan']
         self.output_name = str(output_name)
         self.wb = Workbook()
 
     def case_list(self):
         id_list = []
-        for id in self.tc_list_sheet.iter_rows(max_col=1, values_only=True):
-            if id[0] != 'Original GM TC ID':
+        for id in self.tc_list_sheet.iter_rows(max_col=3, values_only=True):
+            if id[-1] == 'Taipei':
                 id_list.append(id[0].lower())
         return id_list
 
@@ -91,7 +91,7 @@ class Scraper():
         return frame + str(tcid)
 
 if __name__ == '__main__':
-    scrp = Scraper('MY22 test plan for TP@210515.xlsx', 'W21_production_cases.xlsx')
+    scrp = Scraper('W21_main_testplan.xlsx', 'W21_main_cases.xlsx')
     scrp.scrapping()
 
     # scrp2 = Scraper('MY22 test plan_Reg_Mainline_W19.xlsx', 'W19_Main_cases.xlsx')
