@@ -91,8 +91,8 @@ class Scraper():
         return frame + str(tcid)
 
 if __name__ == '__main__':
-    scrp = Scraper('W21_main_testplan.xlsx', 'W21_main_cases.xlsx')
+    scrp = Scraper('MY22_ProductionLine_W22.xlsx', 'W22_production_cases.xlsx')
     scrp.scrapping()
 
-    # scrp2 = Scraper('MY22 test plan_Reg_Mainline_W19.xlsx', 'W19_Main_cases.xlsx')
-    # scrp2.scrapping()
+    scrp2 = Scraper('MY22_Mainline_W22.xlsx', 'W22_Main_cases.xlsx')
+    scrp2.scrapping()
