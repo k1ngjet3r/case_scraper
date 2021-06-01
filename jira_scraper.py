@@ -94,5 +94,5 @@ if __name__ == '__main__':
     scrp = Scraper('W23_production_testplan.xlsx', 'W23_production_cases.xlsx')
     scrp.scrapping()
 
-    scrp2 = Scraper('W23_main_testplan.xlsx', 'W23_main_cases.xlsx')
+    scrp2 = Scraper('W23_Mainline_testplan.xlsx', 'W23_main_cases.xlsx')
     scrp2.scrapping()
