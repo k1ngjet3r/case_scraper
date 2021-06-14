@@ -14,11 +14,14 @@ class Scraper():
         self.wb = Workbook()
 
     def case_list(self):
-        id_list = []
-        for id in self.tc_list_sheet.iter_rows(max_col=3, values_only=True):
-            if id[-1] == 'Taipei':
-                id_list.append(id[0].lower())
-        return id_list
+        id_dict = {}
+        for id in self.tc_list_sheet.iter_rows(max_col=8, values_only=True):
+            if id[2] == 'Taipei':
+                if id[-1] == 'Y':
+                    id_dict[id[0].lower()] = 'Y'
+                else:
+                    id_dict[id[0].lower()] = ' '
+        return id_dict
 
     def scrapping(self):
         print('Opening Jira...')
@@ -41,14 +44,14 @@ class Scraper():
         self.wb.create_sheet('Not found', 0)
         self.wb.create_sheet('Detailed list', 0)
 
-        id_list = self.case_list()
+        id_dict = self.case_list()
         cur_num = 0
-        total_tc = len(id_list)
+        total_tc = len(id_dict)
 
         found_cases = 0
         not_found_cases = 0
 
-        for id in id_list:
+        for id in id_dict:
             cur_num += 1
             print('fatching...{}/{}'.format(cur_num, total_tc))
             driver.get(self.url_gen(id))
@@ -69,7 +72,7 @@ class Scraper():
                 # frop_1 = driver.find_element_by_class_name('customfield_10200').text
                 # frop_2 = driver.find_element_by_class_name('customfield_10319').text
 
-                case_detail = [original_TCID, precondition, test_step, expected, objective]
+                case_detail = [original_TCID, precondition, test_step, expected, objective, id_dict[id]]
                 found_cases += 1
                 print('Found!')
                 print('==========================================')
@@ -91,8 +94,8 @@ class Scraper():
         return frame + str(tcid)
 
 if __name__ == '__main__':
-    scrp = Scraper('W23_production_testplan.xlsx', 'W23_production_cases.xlsx')
-    scrp.scrapping()
+    # scrp = Scraper('W23_productionLine.xlsx', 'W24_production_cases.xlsx')
+    # scrp.scrapping()
 
-    scrp2 = Scraper('W23_Mainline_testplan.xlsx', 'W23_main_cases.xlsx')
+    scrp2 = Scraper('W23_Mainline.xlsx', 'W24_main_cases.xlsx')
     scrp2.scrapping()
