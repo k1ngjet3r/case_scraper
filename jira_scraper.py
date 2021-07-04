@@ -100,5 +100,5 @@ if __name__ == '__main__':
     # scrp2 = Scraper('W25_mainline.xlsx', 'W26_main_cases.xlsx')
     # scrp2.scrapping()
 
-    scrp3 = Scraper('W26_STR_testplan.xlsx', 'W26_STR_cases')
+    scrp3 = Scraper('W27_STR.xlsx', 'W27_STR_cases')
     scrp3.scrapping()
